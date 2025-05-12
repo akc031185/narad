@@ -1,0 +1,24 @@
+
+---
+
+## 📄 Step 2: `docker-compose.yml`
+
+version: '3.8'
+services:
+  orchestrator:
+    build: ./backend/orchestrator
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: narad
+      POSTGRES_PASSWORD: naradpass
+      POSTGRES_DB: narad_db
+    ports:
+      - "5432:5432"
